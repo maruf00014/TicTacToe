@@ -1,8 +1,11 @@
 package com.maruf.game.tictactoe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,22 +21,22 @@ import static android.R.attr.button;
 
 public class tttActivity extends AppCompatActivity {
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
-    TextView resultText;
+    TextView resultText,turnText;
     ImageView resultImage;
     LinearLayout playground;
     int turn;
      public void checkGame(){
-        checkWinner(b1,b2,b3);
-        checkWinner(b4,b5,b6);
-        checkWinner(b7,b8,b9);
-        checkWinner(b1,b4,b7);
-        checkWinner(b2,b5,b8);
-        checkWinner(b3,b6,b9);
-        checkWinner(b1,b5,b9);
-        checkWinner(b3,b5,b7);
+        if(checkWinner(b1,b2,b3));
+        else if(checkWinner(b4,b5,b6));
+        else if(checkWinner(b7,b8,b9));
+        else if(checkWinner(b1,b4,b7));
+        else if(checkWinner(b2,b5,b8));
+        else if(checkWinner(b3,b6,b9));
+        else if(checkWinner(b1,b5,b9));
+        else if(checkWinner(b3,b5,b7));
     }
 
-    public void checkWinner(Button b1,Button b2,Button b3){
+    public boolean checkWinner(Button b1,Button b2,Button b3){
         if (b1.getText()==b2.getText().toString() && b2.getText().toString()==b3.getText().toString() && b3.getText().toString()=="X"){
             b1.setBackgroundResource(android.R.color.black);
             b2.setBackgroundResource(android.R.color.black);
@@ -54,12 +57,12 @@ public class tttActivity extends AppCompatActivity {
 
             setContentView(R.layout.activity_result);
             resultText = (TextView) findViewById(R.id.resultText);
-            resultText.setText("X is winner!!!");
+            resultText.setText(" X is winner !");
 
             resultImage = (ImageView) findViewById(R.id.resultImage);
             resultImage.setImageBitmap(finalbitmap);
 
-
+            return true;
 
         }
         if (b1.getText()==b2.getText().toString() && b2.getText().toString()==b3.getText().toString() && b3.getText().toString()=="O"){
@@ -82,11 +85,14 @@ public class tttActivity extends AppCompatActivity {
 
             setContentView(R.layout.activity_result);
             resultText = (TextView) findViewById(R.id.resultText);
-            resultText.setText("O is winner!!!");
+            resultText.setText(" O is winner !");
 
             resultImage = (ImageView) findViewById(R.id.resultImage);
             resultImage.setImageBitmap(finalbitmap);
+
+            return true;
         }
+         return false;
     }
     public void reset(View view){
         turn =1;
@@ -117,7 +123,7 @@ public class tttActivity extends AppCompatActivity {
         b7.setText("");
         b8.setText("");
         b9.setText("");
-
+        turnText.setText("---- X player turn ----");
     }
 
     @Override
@@ -140,6 +146,7 @@ public class tttActivity extends AppCompatActivity {
         b9=(Button) findViewById(R.id.b9);
 
         playground =(LinearLayout) findViewById(R.id.playground);
+        turnText = (TextView) findViewById(R.id.turnTextView);
 
         b1.setBackgroundResource(android.R.drawable.btn_default);
         b2.setBackgroundResource(android.R.drawable.btn_default);
@@ -150,20 +157,15 @@ public class tttActivity extends AppCompatActivity {
         b7.setBackgroundResource(android.R.drawable.btn_default);
         b8.setBackgroundResource(android.R.drawable.btn_default);
         b9.setBackgroundResource(android.R.drawable.btn_default);
+
+
         turn=1;
+        turnText.setText("---- X player turn ----");
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (b1.getText().toString().equals("")){
-                    if (turn==1) {
-                        b1.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b1.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b1);
                 }
                 checkGame();
             }
@@ -172,15 +174,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b2.getText().toString().equals("")){
-                    if (turn==1) {
-                        b2.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b2.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b2);
                 }
                 checkGame();
 
@@ -190,15 +184,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b3.getText().toString().equals("")){
-                    if (turn==1) {
-                        b3.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b3.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b3);
                 }
                 checkGame();
             }
@@ -208,15 +194,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b4.getText().toString().equals("")){
-                    if (turn==1) {
-                        b4.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b4.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b4);
                 }
                 checkGame();
             }
@@ -225,15 +203,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b5.getText().toString().equals("")){
-                    if (turn==1) {
-                        b5.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b5.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b5);
                 }
                 checkGame();
             }
@@ -242,13 +212,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b6.getText().toString().equals("")) {
-                    if (turn == 1) {
-                        b6.setText("X");
-                        turn = 2;
-                    } else if (turn == 2) {
-                        b6.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b6);
                 }
                 checkGame();
             }
@@ -257,15 +221,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b7.getText().toString().equals("")){
-                    if (turn==1) {
-                        b7.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b7.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b7);
                 }
                 checkGame();
             }
@@ -274,15 +230,7 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b8.getText().toString().equals("")){
-                    if (turn==1) {
-                        b8.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b8.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b8);
                 }
                 checkGame();
             }
@@ -291,22 +239,51 @@ public class tttActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (b9.getText().toString().equals("")){
-                    if (turn==1) {
-                        b9.setText("X");
-                        turn = 2;
-                    }
-
-                    else if (turn==2) {
-                        b9.setText("O");
-                        turn = 1;
-                    }
+                    afterButtonClick(b9);
                 }
                 checkGame();
             }
         });
     }
 
+    public void afterButtonClick(Button button){
+        if (turn==1) {
+            button.setText("X");
+            turnText.setText("---- O player turn ----");
+            turn = 2;
+        }
+
+        else if (turn==2) {
+            button.setText("O");
+            turnText.setText("---- X player turn ----");
+            turn = 1;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(tttActivity.this);
+        dialog.setCancelable(false);
+        dialog.setTitle("Quit?");
+        dialog.setMessage("Are you sure you want to quit?" );
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        })
+                .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+        final AlertDialog alert = dialog.create();
+        alert.show();
 
 
 
+    }
 }

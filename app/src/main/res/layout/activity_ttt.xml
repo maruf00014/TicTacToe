@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_ttt"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
+    android:paddingBottom="48dp"
+    android:paddingLeft="48dp"
+    android:paddingRight="48dp"
+    android:paddingTop="48dp"
+    android:background="@drawable/bg"
     tools:context="com.maruf.game.tictactoe.tttActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
 
+    <TextView
+        android:id="@+id/turnTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="-----"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"/>
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="368dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/playground"
         android:background="@drawable/shape"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_marginEnd="0dp"
         android:orientation="vertical"
+        android:layout_marginTop="40dp"
         android:weightSum="3">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="3">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/b1"
@@ -53,9 +63,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="3">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/b4"
@@ -85,9 +93,7 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:weightSum="3">
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/b7"
@@ -117,11 +123,12 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/cbutton"
         android:onClick="reset"
+        android:layout_gravity="center_horizontal"
         android:text=" reset "
+
         android:textColor="@android:color/white" />
-</RelativeLayout>
+</LinearLayout>
+</LinearLayout>
