@@ -1,5 +1,7 @@
 package com.maruf.game.tictactoe;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +10,7 @@ import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,22 +48,13 @@ public class tttActivity extends AppCompatActivity {
             b2.setTextColor(getResources().getColor(R.color.white));
             b3.setTextColor(getResources().getColor(R.color.white));
 
-
-            View iv = (LinearLayout) findViewById(R.id.playground);
-            Bitmap bitmap = Bitmap.createBitmap(
-                    iv.getWidth(),
-                    iv.getHeight(),
-                    Bitmap.Config.ARGB_8888);
-            Canvas c = new Canvas(bitmap);
-            iv.draw(c);
-            Bitmap finalbitmap = Bitmap.createScaledBitmap(bitmap, 320, 320, false);
-
+            View pg = findViewById(R.id.playground);
             setContentView(R.layout.activity_result);
             resultText = (TextView) findViewById(R.id.resultText);
             resultText.setText(" X is winner !");
 
             resultImage = (ImageView) findViewById(R.id.resultImage);
-            resultImage.setImageBitmap(finalbitmap);
+            resultImage.setImageBitmap(createBitmapFromView(pg));
 
             return true;
 
@@ -74,21 +68,15 @@ public class tttActivity extends AppCompatActivity {
             b2.setTextColor(getResources().getColor(R.color.white));
             b3.setTextColor(getResources().getColor(R.color.white));
 
-            View iv = (LinearLayout) findViewById(R.id.playground);
-            Bitmap bitmap = Bitmap.createBitmap(
-                    iv.getWidth(),
-                    iv.getHeight(),
-                    Bitmap.Config.ARGB_8888);
-            Canvas c = new Canvas(bitmap);
-            iv.draw(c);
-            Bitmap finalbitmap = Bitmap.createScaledBitmap(bitmap, 320, 320, false);
 
+
+            View pg = findViewById(R.id.playground);
             setContentView(R.layout.activity_result);
             resultText = (TextView) findViewById(R.id.resultText);
             resultText.setText(" O is winner !");
 
             resultImage = (ImageView) findViewById(R.id.resultImage);
-            resultImage.setImageBitmap(finalbitmap);
+            resultImage.setImageBitmap(createBitmapFromView(pg));
 
             return true;
         }
@@ -258,6 +246,19 @@ public class tttActivity extends AppCompatActivity {
             turnText.setText("---- X player turn ----");
             turn = 1;
         }
+    }
+
+    private Bitmap createBitmapFromView(View iv) {
+
+        Bitmap bitmap = Bitmap.createBitmap(
+                iv.getWidth(),
+                iv.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bitmap);
+        iv.draw(c);
+        Bitmap finalbitmap = Bitmap.createScaledBitmap(bitmap, 320, 320, false);
+
+        return finalbitmap;
     }
 
     @Override

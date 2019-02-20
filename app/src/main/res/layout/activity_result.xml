@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".tttActivity"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_s"
     android:gravity="center"
     android:orientation="vertical">
 
